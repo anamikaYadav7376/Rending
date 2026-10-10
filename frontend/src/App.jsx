@@ -3,30 +3,38 @@ import ProductsList from './ProductsList';
 
 function App() {
 
- const [products,setProducts]=useState([]);
+  const [products, setProducts] = useState([]);
 
-    useEffect(()=>{
-      // console.log("punima");
-      async function getData(){
-        console.log(".....loading");
-        let responce=await fetch("https://rending.onrender.com/api/products");;
-           let data=  await responce.json();
-          //  console.log(data);
-           setProducts(data.products);
-           console.log(products);
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await fetch(
+          'https://rending.onrender.com/api/products'
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        setProducts(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
       }
+    }
 
-
-     getData();
-    },[])
+    getData();
+  }, []);
 
   return (
     <div>
-
-    <ProductsList products={products}/>
-
+      <ProductsList products={products} />
     </div>
-  )
+  );
+
+
 }
 
 export default App
