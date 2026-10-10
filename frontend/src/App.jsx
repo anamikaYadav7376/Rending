@@ -9,7 +9,7 @@ function App() {
       // console.log("punima");
       async function getData(){
         console.log(".....loading");
-        let responce=await fetch("");
+        let responce=await fetch("https://rending.onrender.com/");
            let data=  await responce.json();
           //  console.log(data);
            setProducts(data.products);
